@@ -2,28 +2,25 @@ pipeline {
     agent any
 
     stages {
-        stage('Cloner le dépôt') {
+        stage('📥 Cloner le dépôt GitHub') {
             steps {
-                echo '📥 Clonage du dépôt GitHub...'
-                // Jenkins clone automatiquement ton repo avec le webhook
+                echo 'Clonage en cours...'
+                // Jenkins clone automatiquement depuis GitHub grâce au Webhook
             }
         }
 
-        stage('Build') {
+        stage('⚙️ Build') {
             steps {
-                echo '⚙️ Construction du projet...'
-                sh 'docker build -t mon-site-web:latest .' // Construit l'image Docker avec index.html
+                echo 'Construction du projet...'
+                sh 'ls -l'  // Liste les fichiers pour vérif
             }
         }
 
-        stage('Deploy') {
+        stage('🚀 Déploiement') {
             steps {
-                echo '🚀 Déploiement en cours...'
-                // Stop et supprime l'ancien conteneur s'il existe
-                sh 'docker stop mon-site-web || true'
-                sh 'docker rm mon-site-web || true'
-                // Lance le nouveau conteneur
-                sh 'docker run -d -p 80:80 --name mon-site-web mon-site-web:latest'
+                echo 'Déploiement local sur le serveur EC2...'
+                // Ex : Copie du index.html vers un dossier exposé par Apache/Nginx
+                sh 'sudo cp index.html /var/www/html/index.html'
             }
         }
     }
