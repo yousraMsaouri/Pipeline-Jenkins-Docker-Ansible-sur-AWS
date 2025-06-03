@@ -2,9 +2,21 @@ pipeline {
     agent any
 
     stages {
-        stage('Vérification') {
+        stage('Cloner le dépôt') {
             steps {
-                echo '✅ Jenkins fonctionne correctement avec ce Jenkinsfile !'
+                echo '📥 Clonage du dépôt GitHub...'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo '⚙️ Construction du projet...'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo '🚀 Déploiement en cours...'
             }
         }
     }
